@@ -22,6 +22,7 @@ IF bInit THEN
 	GVL_Main.M24.bHardwareEnable:= TRUE;
 	GVL_Main.M24.bPowerSelf:= TRUE;
 	GVL_Main.M24.nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M24.nEnableMode := ENUM_StageEnableMode.ALWAYS ; // This axis should always be enables due to belows
 END_IF;
 
 
@@ -29,18 +30,5 @@ fbMotionXDC(stMotionStage:= GVL_Main.M22);
 fbMotionRyDC(stMotionStage:= GVL_Main.M23);
 fbMotionZDC(stMotionStage:= GVL_Main.M24);]]></ST>
     </Implementation>
-    <LineIds Name="PRG_DET_CHAMBER">
-      <LineId Id="109" Count="0" />
-      <LineId Id="151" Count="0" />
-      <LineId Id="153" Count="0" />
-      <LineId Id="155" Count="1" />
-      <LineId Id="158" Count="5" />
-      <LineId Id="157" Count="0" />
-      <LineId Id="154" Count="0" />
-      <LineId Id="152" Count="0" />
-      <LineId Id="119" Count="1" />
-      <LineId Id="127" Count="0" />
-      <LineId Id="121" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
