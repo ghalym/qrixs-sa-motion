@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <GVL Name="GVL_PMPS" Id="{2a4869fd-2738-48ed-a84f-60d813982319}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	fbArbiter: FB_Arbiter(1);
+	io_fbFFHWO: FB_HardwareFFOutput;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

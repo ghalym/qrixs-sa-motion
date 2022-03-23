@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="PRG_DET_CHAMBER" Id="{7779e44c-5234-499f-9f61-3fec67c64546}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_DET_CHAMBER
+VAR	
+	bInit: BOOL := TRUE;
+	fbMotionXDC: FB_MotionStage;
+	fbMotionRyDC: FB_MotionStage;
+	fbMotionZDC: FB_MotionStage;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Det. Chmber
+IF bInit THEN
+	bInit :=FALSE;
+	GVL_Main.M22.bHardwareEnable:= TRUE;
+	GVL_Main.M22.bPowerSelf:= TRUE;
+	GVL_Main.M22.nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M23.bHardwareEnable:= TRUE;
+	GVL_Main.M23.bPowerSelf:= TRUE;
+	GVL_Main.M23.nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M24.bHardwareEnable:= TRUE;
+	GVL_Main.M24.bPowerSelf:= TRUE;
+	GVL_Main.M24.nBrakeMode:= ENUM_StageBrakeMode.NO_BRAKE;
+END_IF;
+
+
+fbMotionXDC(stMotionStage:= GVL_Main.M22);
+fbMotionRyDC(stMotionStage:= GVL_Main.M23);
+fbMotionZDC(stMotionStage:= GVL_Main.M24);]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_DET_CHAMBER">
+      <LineId Id="109" Count="0" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="155" Count="1" />
+      <LineId Id="158" Count="5" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="119" Count="1" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="121" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

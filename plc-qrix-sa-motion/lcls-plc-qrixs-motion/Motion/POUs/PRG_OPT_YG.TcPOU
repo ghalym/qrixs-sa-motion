@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="PRG_OPT_YG" Id="{173d90db-406f-4d99-a17e-cb9894f5d5de}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_OPT_YG
+VAR
+	bDebug: BOOL;
+	bExecuteMotion: BOOL;
+	bMoveOk: BOOL;
+	fbYGMotion: FB_3AxesJack;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbYGMotion(
+	bExecuteMotion	:= bExecuteMotion,
+	bMoveOk			:= bMoveOk,
+	stJack1Axis		:= GVL_Main.M7,
+	stJack2Axis		:= GVL_Main.M8,
+	stJack3Axis		:= GVL_Main.M9,
+	i_DevName		:= 'OPT_YG',
+	io_fbFFHWO		:= GVL_PMPS.io_fbFFHWO,
+	fbArbiter		:= GVL_PMPS.fbArbiter,
+);]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_OPT_YG">
+      <LineId Id="427" Count="8" />
+      <LineId Id="111" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

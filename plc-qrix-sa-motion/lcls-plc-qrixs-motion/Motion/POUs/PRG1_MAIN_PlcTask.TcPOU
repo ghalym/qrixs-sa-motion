@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="PRG1_MAIN_PlcTask" Id="{8eb75229-41bc-4fb3-8329-934637563703}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG1_MAIN_PlcTask
+VAR	
+    {attribute 'TcLinkTo' := 'TIIB[Rack#1A-01 Coupler (EK1100)]^Rack#1A-02 SFIN (EL1918)^StandardOutputs^Standard In Var 2'}
+	bEnaIclk AT %Q*: BOOL := TRUE;
+	
+    {attribute 'TcLinkTo' := 'TIIB[Rack#1A-01 Coupler (EK1100)]^Rack#1A-02 SFIN (EL1918)^StandardOutputs^Standard In Var 1'}
+	bEnaIclkErrAck AT %Q*: BOOL := FALSE;
+	
+    {attribute 'TcLinkTo' := 'TIIB[Rack#1A-01 Coupler (EK1100)]^Rack#1A-02 SFIN (EL1918)^StandardOutputs^Standard In Var 9'}
+	bEnaIclkRestartESTOP AT %Q*: BOOL := FALSE;
+	
+	fbPower_AxisM11: MC_Power;
+	fbPower_AxisM12: MC_Power;
+	fbPower_AxisM13: MC_Power;
+	fbPower_AxisM14: MC_Power;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[ACT_ESTOP();
+
+PRG_2Theta();
+PRG_DET_ARM();
+PRG_DET_CHAMBER();
+PRG_DET_SLIT();
+PRG_DET_FRAME();
+PRG_OPT_SLITS();
+PRG_OPT_YG();
+PRG_OPT_XPM();
+PRG_OPT();
+PRG_Sensor();]]></ST>
+    </Implementation>
+    <Action Name="ACT_ESTOP" Id="{7f369682-d550-4605-a510-2370c6ba3316}">
+      <Implementation>
+        <ST><![CDATA[
+IF bEnaIclkErrAck THEN
+	bEnaIclkErrAck := FALSE;
+END_IF
+IF bEnaIclkRestartESTOP THEN
+	bEnaIclkRestartESTOP := FALSE;
+END_IF
+
+// When user push the ESTOPs
+IF NOT GVL_Main.bESTOP THEN
+	
+	GVL_Main.bOpenSV1 := FALSE;
+	GVL_Main.bOpenSV2 := FALSE;
+
+	GVL_Main.M1.bEnable := FALSE;
+	GVL_Main.M2.bEnable := FALSE;
+	GVL_Main.M3.bEnable := FALSE;
+	GVL_Main.M4.bEnable := FALSE;
+	GVL_Main.M5.bEnable := FALSE;
+	GVL_Main.M6.bEnable := FALSE;
+	GVL_Main.M7.bEnable := FALSE;
+	GVL_Main.M8.bEnable := FALSE;
+	GVL_Main.M9.bEnable := FALSE;
+	GVL_Main.M10.bEnable := FALSE;
+	GVL_Main.M11.bEnable := FALSE;
+	GVL_Main.M12.bEnable := FALSE;
+	GVL_Main.M13.bEnable := FALSE;
+	GVL_Main.M14.bEnable := FALSE;
+	GVL_Main.M15.bEnable := FALSE;
+	GVL_Main.M16.bEnable := FALSE;
+	GVL_Main.M17.bEnable := FALSE;
+	GVL_Main.M18.bEnable := FALSE;
+	GVL_Main.M19.bEnable := FALSE;
+	GVL_Main.M20.bEnable := FALSE;
+	GVL_Main.M21.bEnable := FALSE;
+	GVL_Main.M22.bEnable := FALSE;
+	GVL_Main.M23.bEnable := FALSE;
+	GVL_Main.M24.bEnable := FALSE;
+	GVL_Main.M25.bEnable := FALSE;
+	GVL_Main.M26.bEnable := FALSE;
+	GVL_Main.M27.bEnable := FALSE;
+END_IF
+
+
+// Disable M1(Servo) and M2(Stepper) if the frame is landing...
+IF NOT GVL_Sensor.bFloating THEN
+	GVL_Main.M1.bEnable := FALSE;
+	GVL_Main.M2.bEnable := FALSE;
+END_IF
+	
+
+// When user requests to reset ESTOP.
+IF GVL_Main.bResetIclk THEN
+	GVL_Main.bResetIclk := FALSE;	
+	bEnaIclkErrAck := TRUE;
+	bEnaIclkRestartESTOP := TRUE;
+END_IF
+]]></ST>
+      </Implementation>
+    </Action>
+    <LineIds Name="PRG1_MAIN_PlcTask">
+      <LineId Id="263" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="179" Count="1" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="23" Count="0" />
+    </LineIds>
+    <LineIds Name="PRG1_MAIN_PlcTask.ACT_ESTOP">
+      <LineId Id="39" Count="5" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="3" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="5" Count="27" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="33" Count="5" />
+      <LineId Id="1" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

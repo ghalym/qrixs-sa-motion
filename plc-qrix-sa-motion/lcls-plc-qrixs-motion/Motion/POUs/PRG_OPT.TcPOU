@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="PRG_OPT" Id="{9fd4ef96-d0b3-4d92-a155-89dc0eb4c6d2}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_OPT
+VAR
+	bInit: BOOL := TRUE;
+	fbMotionRxG: FB_MotionStage;
+	fbMotionXG: FB_MotionStage;
+	fbMotionRzPM: FB_MotionStage;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bINIT THEN
+	
+	GVL_Main.M10.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M10.bHardwareEnable := TRUE;
+	GVL_Main.M10.bPowerSelf := TRUE;
+	GVL_Main.M11.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M11.bHardwareEnable := TRUE;
+	GVL_Main.M11.bPowerSelf := TRUE;
+	GVL_Main.M14.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M14.bHardwareEnable := TRUE;
+	GVL_Main.M14.bPowerSelf := TRUE;
+
+	bINIT := FALSE;
+END_IF;
+
+
+fbMotionRxG(stMotionStage:= GVL_Main.M10);
+fbMotionXG(stMotionStage:= GVL_Main.M11);
+fbMotionRzPM(stMotionStage:= GVL_Main.M14);
+]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_OPT">
+      <LineId Id="58" Count="6" />
+      <LineId Id="74" Count="2" />
+      <LineId Id="68" Count="2" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="26" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

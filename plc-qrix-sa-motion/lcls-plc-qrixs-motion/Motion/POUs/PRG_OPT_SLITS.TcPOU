@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="PRG_OPT_SLITS" Id="{87d69d5e-6db8-4f14-b5ec-7224a0a8195a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_OPT_SLITS
+VAR
+	fbSlits_Opt: FB_Slits;
+	bExecuteMotion: BOOL := FALSE;
+	bMoveOk: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbSlits_Opt(	i_DevName:=					'OPT_SLITS',
+				stTopBlade:=				GVL_Main.M5,
+				stBottomBlade:=				GVL_Main.M6,
+				stLeftBlade:=				GVL_Main.M3,
+				stRightBlade:=				GVL_Main.M4,
+				io_fbFFHWO:=				GVL_PMPS.io_fbFFHWO,
+				fbArbiter:=					GVL_PMPS.fbArbiter,
+				bExecuteMotion:=			bExecuteMotion,
+				bMoveOk:=					bMoveOk
+);
+]]></ST>
+    </Implementation>
+    <LineIds Name="PRG_OPT_SLITS">
+      <LineId Id="131" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="133" Count="4" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="180" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
