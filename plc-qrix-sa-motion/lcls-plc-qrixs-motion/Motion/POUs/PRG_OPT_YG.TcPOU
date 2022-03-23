@@ -4,13 +4,41 @@
     <Declaration><![CDATA[PROGRAM PRG_OPT_YG
 VAR
 	bDebug: BOOL;
-	bExecuteMotion: BOOL;
-	bMoveOk: BOOL;
+	bExecuteMotion: BOOL := TRUE;
+	bMoveOk: BOOL :=TRUE;
 	fbYGMotion: FB_3AxesJack;
+	
+	bInit: BOOL :=TRUE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbYGMotion(
+      <ST><![CDATA[
+
+
+IF bInit THEN
+	bInit := FALSE;
+	
+
+	GVL_Main.M7.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M7.bHardwareEnable := TRUE;
+	GVL_Main.M7.bPowerSelf := TRUE;
+	GVL_Main.M8.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M8.bHardwareEnable := TRUE;
+	GVL_Main.M8.bPowerSelf := TRUE;
+	GVL_Main.M9.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M9.bHardwareEnable := TRUE;
+	GVL_Main.M9.bPowerSelf := TRUE;
+	
+	
+	//
+	GVL_Main.M7.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M8.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M9.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+END_IF
+
+
+
+fbYGMotion(
 	bExecuteMotion	:= bExecuteMotion,
 	bMoveOk			:= bMoveOk,
 	stJack1Axis		:= GVL_Main.M7,
@@ -21,9 +49,5 @@ END_VAR
 	fbArbiter		:= GVL_PMPS.fbArbiter,
 );]]></ST>
     </Implementation>
-    <LineIds Name="PRG_OPT_YG">
-      <LineId Id="427" Count="8" />
-      <LineId Id="111" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
