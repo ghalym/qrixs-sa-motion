@@ -3,35 +3,45 @@
   <POU Name="PRG_OPT_XPM" Id="{22739f85-3eea-4d07-957d-370832f3ada0}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PRG_OPT_XPM
 VAR
-	bInit: BOOL;
+	bInit: BOOL :=TRUE;
 	
 	fb2AxesXPM: FB_2AxesTrans;
-	bExecuteMotionXPM: BOOL;
-	bMoveOkXPM: BOOL;
+	bExecuteMotionXPM: BOOL :=TRUE;
+	bMoveOkXPM: BOOL :=TRUE;
 END_VAR
-]]></Declaration>
+
+VAR CONSTANT
+	rDistance	:REAL	:=	0.4;
+END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[
+
+IF bINIT THEN
+	
+	GVL_Main.M12.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M12.bHardwareEnable := TRUE;
+	GVL_Main.M12.bPowerSelf := TRUE;
+	GVL_Main.M13.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M13.bHardwareEnable := TRUE;
+	GVL_Main.M13.bPowerSelf := TRUE;
+	
+		//
+	GVL_Main.M12.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M13.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+
+	bINIT := FALSE;
+END_IF;
+
 fb2AxesXPM(	i_DevName		:=	'OPT_XPM',
 			stFirstAxis		:=	GVL_Main.M12,
 			stSecondAxis	:=	GVL_Main.M13,
 			bExecuteMotion	:=	bExecuteMotionXPM,
 			io_fbFFHWO		:=	GVL_PMPS.io_fbFFHWO,
 			fbArbiter		:=	GVL_PMPS.fbArbiter,
-			rDistance		:=	0.4, // 0.4m
+			rDistance		:=	rDistance,//0.4, // 0.4m
 			bMoveOk			:= bMoveOkXPM
 );
 ]]></ST>
     </Implementation>
-    <LineIds Name="PRG_OPT_XPM">
-      <LineId Id="16" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="30" Count="3" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="26" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
