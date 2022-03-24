@@ -8725,10 +8725,6 @@ External Setpoint Generation:
 							</SubVar>
 						</Var>
 						<Var>
-							<Name>PRG_Sensor.bResetSensorMode</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>PRG_OPT_XPM.fb2AxesXPM.fbFirstStage.fbDriveVirtual.MasterAxis.NcToPlc</Name>
 							<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 							<SubVar>
@@ -8994,6 +8990,70 @@ External Setpoint Generation:
 ]]>
 								</Comment>
 							</SubVar>
+						</Var>
+						<Var>
+							<Name>PRG_Sensor.bResetSensorMode</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stYDF1.iRawCnts</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stYDF1.q_iRawCnts</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stYDF2.iRawCnts</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stYDF2.q_iRawCnts</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stYDF3.iRawCnts</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stYDF3.q_iRawCnts</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stHDF.iRawCnts</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stHDF.q_iRawCnts</Name>
+							<Type>UINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stGraniteP.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stGraniteR.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stFrameP.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stFrameR.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stPS1.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stPS2.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stPS3.iRawCnts</Name>
+							<Type>INT</Type>
 						</Var>
 						<Var>
 							<Name>GVL_Main.bESTOP</Name>
@@ -11645,50 +11705,6 @@ External Setpoint Generation:
 							</Comment>
 							<Type>INT</Type>
 						</Var>
-						<Var>
-							<Name>GVL_Sensor.stYDF1.iRawCnts</Name>
-							<Type>DINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stYDF2.iRawCnts</Name>
-							<Type>DINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stYDF3.iRawCnts</Name>
-							<Type>DINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stHDF.iRawCnts</Name>
-							<Type>DINT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stGraniteP.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stGraniteR.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stFrameP.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stFrameR.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stPS1.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stPS2.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stPS3.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
@@ -11847,14 +11863,6 @@ External Setpoint Generation:
 							</SubVar>
 						</Var>
 						<Var>
-							<Name>PRG_Sensor.bSensorHeadValueMode</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>PRG_Sensor.bSensorHeadNormalValueMode</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>PRG_OPT_XPM.fb2AxesXPM.fbFirstStage.fbDriveVirtual.MasterAxis.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
@@ -11895,6 +11903,14 @@ External Setpoint Generation:
 						<Var>
 							<Name>PRG_OPT.fbMotionRzPM.fbDriveVirtual.MasterAxis.PlcToNc</Name>
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>PRG_Sensor.bSensorHeadValueMode</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>PRG_Sensor.bSensorHeadNormalValueMode</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>PRG_Sensor.uintTest</Name>

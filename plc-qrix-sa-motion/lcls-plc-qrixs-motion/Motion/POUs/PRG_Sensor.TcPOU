@@ -79,6 +79,12 @@ GVL_Sensor.stPS3.iOffset		:= 3277;	// 0MPa@1V  P=0.25(V-V0), V0 = 1.0
 GVL_Sensor.stYDF1.fValue		:= DINT_TO_REAL(GVL_Sensor.stYDF1.iRawCnts - GVL_Sensor.stYDF1.iOffset) / GVL_Sensor.stYDF1.fCntsInEGU;
 GVL_Sensor.stYDF2.fValue		:= DINT_TO_REAL(GVL_Sensor.stYDF2.iRawCnts - GVL_Sensor.stYDF2.iOffset) / GVL_Sensor.stYDF2.fCntsInEGU;
 GVL_Sensor.stYDF3.fValue		:= DINT_TO_REAL(GVL_Sensor.stYDF3.iRawCnts - GVL_Sensor.stYDF3.iOffset) / GVL_Sensor.stYDF3.fCntsInEGU;
+GVL_Sensor.stYDF1.q_iRawCnts := DINT_TO_UINT( GVL_Sensor.stYDF1.iRawCnts);
+GVL_Sensor.stYDF2.q_iRawCnts := DINT_TO_UINT( GVL_Sensor.stYDF1.iRawCnts);
+GVL_Sensor.stYDF2.q_iRawCnts := DINT_TO_UINT( GVL_Sensor.stYDF1.iRawCnts);
+
+
+
 GVL_Sensor.stHDF.fValue			:= DINT_TO_REAL(GVL_Sensor.stHDF.iRawCnts  - GVL_Sensor.stHDF.iOffset)  / GVL_Sensor.stHDF.fCntsInEGU;
 GVL_Sensor.stGraniteP.fValue	:= INT_TO_REAL(GVL_Sensor.stGraniteP.iRawCnts - GVL_Sensor.stGraniteP.iOffset) / GVL_Sensor.stGraniteP.fCntsInEGU;
 GVL_Sensor.stGraniteR.fValue	:= INT_TO_REAL(GVL_Sensor.stGraniteR.iRawCnts - GVL_Sensor.stGraniteR.iOffset) / GVL_Sensor.stGraniteR.fCntsInEGU;

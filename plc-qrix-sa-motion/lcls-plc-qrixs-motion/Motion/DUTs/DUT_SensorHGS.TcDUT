@@ -9,6 +9,7 @@ STRUCT
 	fValue:				REAL;
 	iRawCnts AT %I*:	DINT;
 	iOffset:			DINT;
+	q_iRawCnts AT %I*:	UINT;
 END_STRUCT
 END_TYPE
 ]]></Declaration>
