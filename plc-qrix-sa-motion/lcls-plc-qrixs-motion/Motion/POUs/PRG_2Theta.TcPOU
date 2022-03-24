@@ -9,13 +9,13 @@ VAR
 	fb2ThetaStepper : FB_MotionStage;
 	fb2ThetaServo : FB_MotionStage;
 	bMoveOk: BOOL;
-	
-	
-	
+	 
+END_VAR
+
+VAR CONSTANT
 	fThresholdPS1: REAL := 0.15;
-	fThresholdPS2: REAL;
-	fThresholdPS3: REAL;
- 
+	fThresholdPS2: REAL := 0.15;
+	fThresholdPS3: REAL := 0.15;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -35,6 +35,10 @@ END_VAR
 	GVL_Main.M2.nBrakeMode := ENUM_StageBrakeMode.IF_MOVING;
 	GVL_Main.M2.bHardwareEnable := TRUE;
 	GVL_Main.M2.bPowerSelf := FALSE;
+	
+	
+	GVL_Main.M1.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M2.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
 END_IF;
 
 ACT_Servo();
@@ -74,7 +78,9 @@ GVL_Main.M2.bAllEnable := 		GVL_Main.M2.bEnable
 							AND GVL_Main.bESTOP // ESTOP
 							AND	GVL_Sensor.stPS1.fValue > fThresholdPS1
 							AND GVL_Sensor.stPS2.fValue > fThresholdPS2
-							AND GVL_Sensor.stPS3.fValue > fThresholdPS3; // Compressed-air pressure
+							AND GVL_Sensor.stPS3.fValue > fThresholdPS3 // Compressed-air pressure
+							AND GVL_Main.bOpenSV1
+							AND GVL_Main.bOpenSV2;
 GVL_Main.M2.bAllForwardEnable  := GVL_Main.M2.bLimitForwardEnable  AND GVL_Main.bESTOP;
 GVL_Main.M2.bAllBackwardEnable := GVL_Main.M2.bLimitBackwardEnable AND GVL_Main.bESTOP;
 
@@ -87,41 +93,5 @@ fbPower_AxisM2(
 );]]></ST>
       </Implementation>
     </Action>
-    <LineIds Name="PRG_2Theta">
-      <LineId Id="33" Count="0" />
-      <LineId Id="38" Count="0" />
-      <LineId Id="103" Count="0" />
-      <LineId Id="107" Count="4" />
-      <LineId Id="113" Count="0" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="105" Count="1" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="40" Count="1" />
-      <LineId Id="91" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="92" Count="0" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="80" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_2Theta.ACT_Servo">
-      <LineId Id="4" Count="0" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="5" Count="1" />
-      <LineId Id="18" Count="2" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="9" Count="8" />
-      <LineId Id="1" Count="0" />
-    </LineIds>
-    <LineIds Name="PRG_2Theta.ACT_Stepper">
-      <LineId Id="2" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="3" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="4" Count="2" />
-      <LineId Id="16" Count="1" />
-      <LineId Id="7" Count="8" />
-      <LineId Id="1" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
