@@ -4,12 +4,38 @@
     <Declaration><![CDATA[PROGRAM PRG_DET_SLIT
 VAR
 	fbSlits_Det: FB_Slits;
-	bExecuteMotion: BOOL := FALSE;
-	bMoveOk: BOOL;
+	bExecuteMotion: BOOL := TRUE;
+	bMoveOk: BOOL :=TRUE;
+	bInit:BOOL:=TRUE;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// 4 jaws slit
+
+IF bInit THEN
+	bInit := FALSE;
+	
+	GVL_Main.M18.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M18.bHardwareEnable := TRUE;
+	GVL_Main.M18.bPowerSelf := TRUE;
+	
+	GVL_Main.M19.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M19.bHardwareEnable := TRUE;
+	GVL_Main.M19.bPowerSelf := TRUE;
+	GVL_Main.M20.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M20.bHardwareEnable := TRUE;
+	GVL_Main.M20.bPowerSelf := TRUE;
+	GVL_Main.M21.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M21.bHardwareEnable := TRUE;
+	GVL_Main.M21.bPowerSelf := TRUE;
+	
+	
+	//
+	GVL_Main.M18.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M19.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M20.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M21.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+END_IF
 fbSlits_Det(	i_DevName:=					'DET_SLITS',
 				stTopBlade:=				GVL_Main.M20,
 				stBottomBlade:=				GVL_Main.M21,
@@ -22,17 +48,5 @@ fbSlits_Det(	i_DevName:=					'DET_SLITS',
 );
 ]]></ST>
     </Implementation>
-    <LineIds Name="PRG_DET_SLIT">
-      <LineId Id="98" Count="0" />
-      <LineId Id="114" Count="0" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="119" Count="1" />
-      <LineId Id="122" Count="1" />
-      <LineId Id="232" Count="0" />
-      <LineId Id="284" Count="0" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="30" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

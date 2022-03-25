@@ -21,6 +21,10 @@ END_VAR
 	GVL_Main.M14.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
 	GVL_Main.M14.bHardwareEnable := TRUE;
 	GVL_Main.M14.bPowerSelf := TRUE;
+	
+	GVL_Main.M10.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M11.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M14.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
 
 	bINIT := FALSE;
 END_IF;
@@ -31,16 +35,5 @@ fbMotionXG(stMotionStage:= GVL_Main.M11);
 fbMotionRzPM(stMotionStage:= GVL_Main.M14);
 ]]></ST>
     </Implementation>
-    <LineIds Name="PRG_OPT">
-      <LineId Id="58" Count="6" />
-      <LineId Id="74" Count="2" />
-      <LineId Id="68" Count="2" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="16" Count="1" />
-      <LineId Id="26" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

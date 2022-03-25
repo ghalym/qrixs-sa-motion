@@ -40,6 +40,12 @@ END_VAR
 	GVL_Main.M27.nBrakeMode := ENUM_StageBrakeMode.IF_ENABLED;
 	GVL_Main.M27.bHardwareEnable := TRUE;
 	GVL_Main.M27.bPowerSelf := TRUE;
+	
+	
+	
+	GVL_Main.M25.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M26.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M27.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
 END_IF
 
 stRenishawAbsEncMaster.Ref := 15370335;
@@ -107,51 +113,5 @@ fbPower_AxisM27(
 // *)
 ]]></ST>
     </Implementation>
-    <LineIds Name="PRG_DET_ARM">
-      <LineId Id="223" Count="0" />
-      <LineId Id="226" Count="0" />
-      <LineId Id="228" Count="0" />
-      <LineId Id="284" Count="0" />
-      <LineId Id="310" Count="1" />
-      <LineId Id="285" Count="0" />
-      <LineId Id="312" Count="1" />
-      <LineId Id="286" Count="0" />
-      <LineId Id="314" Count="1" />
-      <LineId Id="287" Count="0" />
-      <LineId Id="227" Count="0" />
-      <LineId Id="246" Count="0" />
-      <LineId Id="231" Count="0" />
-      <LineId Id="247" Count="0" />
-      <LineId Id="327" Count="0" />
-      <LineId Id="370" Count="7" />
-      <LineId Id="248" Count="0" />
-      <LineId Id="328" Count="0" />
-      <LineId Id="332" Count="0" />
-      <LineId Id="335" Count="0" />
-      <LineId Id="329" Count="0" />
-      <LineId Id="345" Count="0" />
-      <LineId Id="326" Count="0" />
-      <LineId Id="236" Count="0" />
-      <LineId Id="324" Count="1" />
-      <LineId Id="217" Count="0" />
-      <LineId Id="216" Count="0" />
-      <LineId Id="130" Count="0" />
-      <LineId Id="132" Count="0" />
-      <LineId Id="135" Count="2" />
-      <LineId Id="176" Count="0" />
-      <LineId Id="133" Count="0" />
-      <LineId Id="138" Count="2" />
-      <LineId Id="177" Count="0" />
-      <LineId Id="134" Count="0" />
-      <LineId Id="141" Count="2" />
-      <LineId Id="165" Count="0" />
-      <LineId Id="146" Count="1" />
-      <LineId Id="159" Count="2" />
-      <LineId Id="151" Count="7" />
-      <LineId Id="117" Count="6" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="321" Count="2" />
-      <LineId Id="184" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

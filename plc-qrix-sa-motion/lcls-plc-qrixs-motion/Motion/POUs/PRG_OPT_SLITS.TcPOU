@@ -4,12 +4,42 @@
     <Declaration><![CDATA[PROGRAM PRG_OPT_SLITS
 VAR
 	fbSlits_Opt: FB_Slits;
-	bExecuteMotion: BOOL := FALSE;
-	bMoveOk: BOOL;
+	bExecuteMotion: BOOL := TRUE;
+	bMoveOk: BOOL :=TRUE;
+	bInit:BOOl:=TRUE;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbSlits_Opt(	i_DevName:=					'OPT_SLITS',
+      <ST><![CDATA[// 4 jaws slit
+
+IF bInit THEN
+	bInit := FALSE;
+	
+	GVL_Main.M3.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M3.bHardwareEnable := TRUE;
+	GVL_Main.M3.bPowerSelf := TRUE;
+	
+	GVL_Main.M4.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M4.bHardwareEnable := TRUE;
+	GVL_Main.M4.bPowerSelf := TRUE;
+	GVL_Main.M5.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M5.bHardwareEnable := TRUE;
+	GVL_Main.M5.bPowerSelf := TRUE;
+	GVL_Main.M6.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M6.bHardwareEnable := TRUE;
+	GVL_Main.M6.bPowerSelf := TRUE;
+	
+	
+	//
+	GVL_Main.M3.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M4.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M5.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+	GVL_Main.M6.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
+END_IF
+
+
+
+fbSlits_Opt(	i_DevName:=					'OPT_SLITS',
 				stTopBlade:=				GVL_Main.M5,
 				stBottomBlade:=				GVL_Main.M6,
 				stLeftBlade:=				GVL_Main.M3,
@@ -21,14 +51,5 @@ END_VAR
 );
 ]]></ST>
     </Implementation>
-    <LineIds Name="PRG_OPT_SLITS">
-      <LineId Id="131" Count="0" />
-      <LineId Id="148" Count="0" />
-      <LineId Id="133" Count="4" />
-      <LineId Id="140" Count="0" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="168" Count="0" />
-      <LineId Id="180" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

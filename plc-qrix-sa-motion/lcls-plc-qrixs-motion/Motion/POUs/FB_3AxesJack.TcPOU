@@ -38,19 +38,6 @@ VAR_INPUT
     io: io;
     '}
     rEncoderOffsetJack3: REAL;
-	
-	(*Distance X*)
-	rDistanceX: REAL := 0.24;
-	(*Distance Z*)
-	rDistanceZ: REAL := 0.88;
-	
-	(* Limit to Y +/-5mm and +/- Pitch/Roll 18mrad *)
-	rLimitPositionMax: REAL := 5;
-	rLimitPositionMin: REAL := -5;	
-	rLimitPitchMin: REAL := -18;
-	rLimitPitchMax: REAL :=  18;
-	rLimitRollMin: REAL  := -18;
-	rLimitRollMax: REAL  :=  18;
 
     i_DevName : STRING; //device name for FFO and PMPS diagnostics
 	
@@ -177,6 +164,22 @@ VAR
 	
 	fbPower: MC_POWER;
 END_VAR
+VAR CONSTANT
+	//DO NOT CHANGE PLEASE
+	(*Distance X*)
+	rDistanceX: REAL := 0.24;
+	(*Distance Z*)
+	rDistanceZ: REAL := 0.88;
+	
+	(* Limit to Y +/-5mm and +/- Pitch/Roll 18mrad *)
+	rLimitPositionMin: REAL := -5;	
+	rLimitPositionMax: REAL := 5;
+	rLimitPitchMin: REAL := -18;
+	rLimitPitchMax: REAL :=  18;
+	rLimitRollMin: REAL  := -18;
+	rLimitRollMax: REAL  :=  18;
+END_VAR
+
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Initialize
@@ -340,55 +343,5 @@ fbPower(
 ]]></ST>
       </Implementation>
     </Action>
-    <LineIds Name="FB_3AxesJack">
-      <LineId Id="173" Count="6" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="357" Count="1" />
-      <LineId Id="356" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_3AxesJack.ACT_CalculatePositions">
-      <LineId Id="2" Count="12" />
-      <LineId Id="26" Count="4" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="16" Count="2" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="22" Count="1" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="43" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_3AxesJack.ACT_Init">
-      <LineId Id="2" Count="4" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="7" Count="1" />
-      <LineId Id="14" Count="1" />
-      <LineId Id="18" Count="1" />
-      <LineId Id="11" Count="1" />
-      <LineId Id="1" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_3AxesJack.ACT_Motion">
-      <LineId Id="2" Count="1" />
-      <LineId Id="41" Count="1" />
-      <LineId Id="5" Count="16" />
-      <LineId Id="52" Count="5" />
-      <LineId Id="22" Count="13" />
-      <LineId Id="43" Count="3" />
-      <LineId Id="48" Count="3" />
-      <LineId Id="47" Count="0" />
-      <LineId Id="39" Count="1" />
-      <LineId Id="1" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_3AxesJack.ACT_VirtualLimitSW">
-      <LineId Id="46" Count="7" />
-      <LineId Id="55" Count="1" />
-      <LineId Id="4" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="9" Count="13" />
-      <LineId Id="29" Count="5" />
-      <LineId Id="1" Count="0" />
-      <LineId Id="39" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>
