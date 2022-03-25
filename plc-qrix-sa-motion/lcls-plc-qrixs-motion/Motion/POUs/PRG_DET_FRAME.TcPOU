@@ -587,7 +587,7 @@ CASE iStepSetGaugeValue OF
 			);
 		END_IF;
 		
-		IF NOT(fbSetPosition_M17.Execute OR fbSetPosition_M17.Execute OR fbSetPosition_M17.Execute) THEN
+		IF NOT(fbSetPosition_M15.Execute OR fbSetPosition_M16.Execute OR fbSetPosition_M17.Execute) THEN
 			iStepSetGaugeValue:=3;
 		END_IF;
 		

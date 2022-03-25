@@ -8996,34 +8996,6 @@ External Setpoint Generation:
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Sensor.stGraniteP.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stGraniteR.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stFrameP.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stFrameR.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stPS1.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stPS2.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Sensor.stPS3.iRawCnts</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
 							<Name>GVL_Main.bESTOP</Name>
 							<Type>BOOL</Type>
 						</Var>
@@ -11688,6 +11660,34 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_Sensor.stHDF.iRawCnts</Name>
 							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stGraniteP.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stGraniteR.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stFrameP.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stFrameR.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stPS1.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stPS2.iRawCnts</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Sensor.stPS3.iRawCnts</Name>
+							<Type>INT</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
