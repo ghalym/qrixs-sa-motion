@@ -40,13 +40,13 @@ END_VAR
 	bInit := FALSE;
 	
 	// Servo
-	GVL_Main.M1.nBrakeMode := ENUM_StageBrakeMode.IF_MOVING;
+	GVL_Main.M1.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
 	GVL_Main.M1.bHardwareEnable := TRUE;
 	GVL_Main.M1.bPowerSelf := FALSE;
 	
 	// Set torque output limit (unit: 0.1%)
-	GVL_Main.iServoTorqueLimitPositive := 700; // 700*0.1% = 70%
-	GVL_Main.iServoTorqueLimitNegative := 700;
+	GVL_Main.iServoTorqueLimitPositive := 250; // 250*0.1% = 25%
+	GVL_Main.iServoTorqueLimitNegative := 250;
 	
 	// Stepper
 	GVL_Main.M2.nBrakeMode := ENUM_StageBrakeMode.IF_MOVING;
@@ -163,7 +163,7 @@ GVL_Main.M2.bAllBackwardEnable := GVL_Main.M2.bLimitBackwardEnable AND GVL_Main.
 
 fbPower_AxisM2(
 	Axis:= GVL_Main.M2.Axis,
-	Enable := GVL_Main.M2.bAllEnable AND ( ABS(GVL_Main.M1.Axis.NcToPlc.ActPos - GVL_Main.M2.Axis.NcToPlc.ActPos) <1) ,
+	Enable := GVL_Main.M2.bAllEnable,// AND ( ABS(GVL_Main.M1.Axis.NcToPlc.ActPos - GVL_Main.M2.Axis.NcToPlc.ActPos) <2) ,
 	Enable_Positive:= GVL_Main.M2.bAllForwardEnable,
 	Enable_Negative:= GVL_Main.M2.bAllBackwardEnable,
 	Override:= 100

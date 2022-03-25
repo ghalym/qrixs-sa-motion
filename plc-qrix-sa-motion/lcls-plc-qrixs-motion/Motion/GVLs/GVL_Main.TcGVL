@@ -23,15 +23,11 @@ VAR_GLOBAL
 	{attribute 'TcLinkTo' := 'TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Digital inputs'}
 	i_ServoLimits AT %I* :UDINT;
 
-	//TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Position actual value
-	
-	{attribute 'TcLinkTo' := '	.nRawEncoderULINT     	:= TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Position actual value
-                                .bBrakeRelease			:= TIIB[Rack#1A-05 MB_2Th (EL2602)]^Channel 1^Output
-	'}
+	{attribute 'TcLinkTo' := '	.nRawEncoderULINT     	:= TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Position actual value'}
 	M1: DUT_MotionStage;
 	
 	// 2Theta Stepper
-	//{attribute 'TcLinkTo' := '  .bBrakeRelease			:= TIIB[Rack#1A-05 MB_2Th (EL2602)]^Channel 1^Output'}
+	{attribute 'TcLinkTo' := '  .bBrakeRelease			:= TIIB[Rack#1A-05 MB_2Th (EL2602)]^Channel 1^Output'}
 	M2: DUT_MotionStage;
 	
 	// XS1
