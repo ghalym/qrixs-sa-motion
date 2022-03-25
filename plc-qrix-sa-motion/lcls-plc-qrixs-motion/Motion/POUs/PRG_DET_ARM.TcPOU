@@ -4,7 +4,7 @@
     <Declaration><![CDATA[PROGRAM PRG_DET_ARM
 VAR
 	bInit: BOOL := TRUE;
-	bExecuteCouple: BOOL := FALSE;
+	bExecuteCouple: BOOL := TRUE;
 	bExecuteDecouple: BOOL := FALSE;
 	
 	fbMotionYF1: FB_MotionStage;

@@ -9,6 +9,23 @@ VAR
 	fb2ThetaStepper : FB_MotionStage;
 	fb2ThetaServo : FB_MotionStage;
 	bMoveOk: BOOL;
+	
+	
+	//coupling
+	bExecuteCouple: BOOL := FALSE;
+	bExecuteDecouple: BOOL := FALSE;
+	{attribute 'TcLinkTo' := '	.Count := TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Position actual value'}
+	stRenishawAbsEncMaster: ST_RenishawAbsEnc;
+
+	stRenishawAbsEncSlave: ST_RenishawAbsEnc;
+
+	fbAutoCoupling: FB_GantryAutoCoupling;
+	
+	//set pos
+	
+	bEnableSetPosition: BOOL;
+	iStepSetPosition : INT := 1;
+	fbSetPosition_M2: MC_SetPosition;
 	 
 END_VAR
 
@@ -23,13 +40,13 @@ END_VAR
 	bInit := FALSE;
 	
 	// Servo
-	GVL_Main.M1.nBrakeMode := ENUM_StageBrakeMode.NO_BRAKE;
+	GVL_Main.M1.nBrakeMode := ENUM_StageBrakeMode.IF_MOVING;
 	GVL_Main.M1.bHardwareEnable := TRUE;
 	GVL_Main.M1.bPowerSelf := FALSE;
 	
 	// Set torque output limit (unit: 0.1%)
-	GVL_Main.iServoTorqueLimitPositive := 1500; // 1500*0.1% = 150%
-	GVL_Main.iServoTorqueLimitNegative := 1500;
+	GVL_Main.iServoTorqueLimitPositive := 700; // 700*0.1% = 70%
+	GVL_Main.iServoTorqueLimitNegative := 700;
 	
 	// Stepper
 	GVL_Main.M2.nBrakeMode := ENUM_StageBrakeMode.IF_MOVING;
@@ -37,17 +54,40 @@ END_VAR
 	GVL_Main.M2.bPowerSelf := FALSE;
 	
 	
+	bExecuteCouple := TRUE;
+	
 	GVL_Main.M1.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
 	GVL_Main.M2.nEnableMode := ENUM_StageEnableMode.DURING_MOTION ;
 END_IF;
 
+
+
+// AutoCoupling
+fbAutoCoupling(	nGantryTol 			:= 200000, // 50nm/count
+				Master				:= GVL_Main.M1,
+				MasterEnc			:= stRenishawAbsEncMaster,
+				Slave				:= GVL_Main.M2,
+				SlaveEnc			:= stRenishawAbsEncMaster,
+				bExecuteCouple 		:= bExecuteCouple,
+				bExecuteDecouple 	:= bExecuteDecouple,
+);
+
 ACT_Servo();
 ACT_Stepper();	
-]]></ST>
+ACT_SetStepperPosition();]]></ST>
     </Implementation>
     <Action Name="ACT_Servo" Id="{9c766fea-8ced-417d-ada9-1b7659117047}">
       <Implementation>
         <ST><![CDATA[fb2ThetaServo(stMotionStage:=GVL_Main.M1);
+
+GVL_Main.M1.bLimitForwardEnable := NOT TO_BOOL(GVL_Main.i_ServoLimits.1);
+GVL_Main.M1.bLimitBackwardEnable :=NOT TO_BOOL(GVL_Main.i_ServoLimits.0);
+
+GVL_Main.M2.bLimitForwardEnable := NOT TO_BOOL(GVL_Main.i_ServoLimits.1);
+GVL_Main.M2.bLimitBackwardEnable :=NOT TO_BOOL(GVL_Main.i_ServoLimits.0);
+
+
+
 
 GVL_Main.M1.bPowerSelf := FALSE;
 
@@ -61,11 +101,48 @@ GVL_Main.M1.bAllBackwardEnable := GVL_Main.M1.bLimitBackwardEnable AND GVL_Main.
 
 fbPower_AxisM1(
 	Axis:= GVL_Main.M1.Axis,
-	Enable := GVL_Main.M1.bAllEnable,
+	Enable := GVL_Main.M1.bAllEnable AND ( ABS(GVL_Main.M1.Axis.NcToPlc.ActPos - GVL_Main.M2.Axis.NcToPlc.ActPos) <1)  ,
 	Enable_Positive:= GVL_Main.M1.bAllForwardEnable,
 	Enable_Negative:= GVL_Main.M1.bAllBackwardEnable,
 	Override:= 100
 );]]></ST>
+      </Implementation>
+    </Action>
+    <Action Name="ACT_SetStepperPosition" Id="{a8f7a4e6-332f-4da8-b95a-d91efba95948}">
+      <Implementation>
+        <ST><![CDATA[
+CASE iStepSetPosition OF
+	1:
+		IF bEnableSetPosition AND NOT (GVL_Main.M2.bBusy OR GVL_Main.M2.bError) THEN
+			
+			iStepSetPosition:=2;
+			bExecuteCouple:= FALSE;
+			bExecuteDecouple:= TRUE;
+		ELSE
+			bEnableSetPosition := FALSE;
+		END_IF;		
+	2:			
+		fbSetPosition_M2(	Axis :=		GVL_Main.M2.Axis,
+							Execute :=	NOT fbSetPosition_M2.Done,
+							Position :=	GVL_Main.M1.Axis.NcToPlc.ActPos
+		);
+		IF fbSetPosition_M2.Done OR fbSetPosition_M2.Error THEN
+			fbSetPosition_M2(	Axis :=		GVL_Main.M2.Axis,
+								Execute :=	FALSE
+			);
+		END_IF;
+
+		
+		IF NOT(fbSetPosition_M2.Execute) THEN
+			iStepSetPosition:=3;
+		END_IF;
+		
+	3:		
+		bEnableSetPosition := FALSE;
+		iStepSetPosition:=1;
+		bExecuteCouple:= TRUE;
+		bExecuteDecouple:= FALSE;
+END_CASE;]]></ST>
       </Implementation>
     </Action>
     <Action Name="ACT_Stepper" Id="{66e0b0b8-d09b-4167-8180-d5937a88b96b}">
@@ -86,7 +163,7 @@ GVL_Main.M2.bAllBackwardEnable := GVL_Main.M2.bLimitBackwardEnable AND GVL_Main.
 
 fbPower_AxisM2(
 	Axis:= GVL_Main.M2.Axis,
-	Enable := GVL_Main.M2.bAllEnable,
+	Enable := GVL_Main.M2.bAllEnable AND ( ABS(GVL_Main.M1.Axis.NcToPlc.ActPos - GVL_Main.M2.Axis.NcToPlc.ActPos) <1) ,
 	Enable_Positive:= GVL_Main.M2.bAllForwardEnable,
 	Enable_Negative:= GVL_Main.M2.bAllBackwardEnable,
 	Override:= 100

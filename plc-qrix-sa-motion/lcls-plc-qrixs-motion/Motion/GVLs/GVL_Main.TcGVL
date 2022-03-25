@@ -19,14 +19,19 @@ VAR_GLOBAL
 	iServoTorqueLimitNegative AT %Q*: UINT;
 
 	// 2Theta Servo
+	// TIID^CX2020 (EtherCAT)^Term 1 (EK1200)^Term 2 (EK1122)^Rack#1C_ServoDR (NCR-HD Series)^260th transmit PDO Mapping^Digital inputs
+	{attribute 'TcLinkTo' := 'TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Digital inputs'}
+	i_ServoLimits AT %I* :UDINT;
+
+	//TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Position actual value
+	
+	{attribute 'TcLinkTo' := '	.nRawEncoderULINT     	:= TIIB[Rack#1C_ServoDR (NCR-HD Series)]^260th transmit PDO Mapping^Position actual value
+                                .bBrakeRelease			:= TIIB[Rack#1A-05 MB_2Th (EL2602)]^Channel 1^Output
+	'}
 	M1: DUT_MotionStage;
 	
 	// 2Theta Stepper
-	{attribute 'TcLinkTo' := '	.bLimitForwardEnable  	:= TIIB[Rack#1A-04 DR_2Th (EL7047)]^STM Status^Status^Digital input 1;
-								.bLimitBackwardEnable 	:= TIIB[Rack#1A-04 DR_2Th (EL7047)]^STM Status^Status^Digital input 2;
-								.nRawEncoderULINT     	:= TIIB[Rack#1A-06 ENC_2Th (EL5042)]^FB Inputs Channel 1^Position;
-								.bBrakeRelease			:= TIIB[Rack#1A-05 MB_2Th (EL2602)]^Channel 1^Output
-	'}
+	//{attribute 'TcLinkTo' := '  .bBrakeRelease			:= TIIB[Rack#1A-05 MB_2Th (EL2602)]^Channel 1^Output'}
 	M2: DUT_MotionStage;
 	
 	// XS1
